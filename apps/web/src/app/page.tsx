@@ -10,12 +10,11 @@ export default async function Home() {
       <div className="flex gap-8 text-xl">
         <p>Products: {data.stats.products}</p>
         <p>Carts: {data.stats.carts}</p>
-        
-        <p>Product list:</p>
+      </div>
+      <p>Product list:</p>
         {products.map((product) => (
           <p>- {product.name}</p>
         ))}
-      </div>
     </main>
   );
 }

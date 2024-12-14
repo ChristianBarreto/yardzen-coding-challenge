@@ -1,20 +1,20 @@
-import { getHello, getProducts } from "./api";
+import Navbar from "./components/organisms/Navbar";
+import { getCart, getHello, getProducts } from "./api";
+import Hero from "./components/organisms/Hero";
+import ProductList from "./components/organisms/ProductList";
 
 export default async function Home() {
-  const data = await getHello();
+  const hello = await getHello();
   const products = await getProducts();
+  const cart = await getCart();
+  
+  const cartId = cart[0].id;
+  console.log("Cart ID", cartId)
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-24 gap-4">
-      <h1 className="text-4xl font-bold">{data.message}</h1>
-      <div className="flex gap-8 text-xl">
-        <p>Products: {data.stats.products}</p>
-        <p>Carts: {data.stats.carts}</p>
-      </div>
-      <p>Product list:</p>
-        {products.map((product) => (
-          <p>- {product.name}</p>
-        ))}
+    <main>
+      <Hero hello={hello} />
+      <ProductList products={products} cartId={cartId} />
     </main>
   );
 }

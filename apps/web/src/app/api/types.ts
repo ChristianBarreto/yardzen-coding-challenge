@@ -15,3 +15,8 @@ export type Product = {
 };
 
 export type ProductsResponse = Product[];
+
+export type CartItemsPost = {
+  cartId: string,
+  productIds: string[]
+}

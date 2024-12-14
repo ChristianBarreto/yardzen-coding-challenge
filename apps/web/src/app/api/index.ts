@@ -1,8 +1,10 @@
-import { HelloResponse, ProductsResponse } from "./types";
+import { CartItemsPost, HelloResponse, ProductsResponse } from "./types";
+
+const baseUrl = "http://localhost:3333";
 
 export async function getHello(): Promise<HelloResponse> {
   try {
-    const response = await fetch("http://localhost:3333/hello");
+    const response = await fetch(`${baseUrl}/hello`);
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
@@ -18,7 +20,7 @@ export async function getHello(): Promise<HelloResponse> {
 
 export async function getProducts(): Promise<ProductsResponse> {
   try {
-    const response = await fetch("http://localhost:3333/products");
+    const response = await fetch(`${baseUrl}/products`);
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
@@ -26,5 +28,34 @@ export async function getProducts(): Promise<ProductsResponse> {
   } catch (error) {
     console.error("Error fetching products:", error);
     return [];
+  }
+}
+
+export async function getCart(): Promise<ProductsResponse> {
+  try {
+    const response = await fetch(`${baseUrl}/cart`);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    return response.json();
+  } catch (error) {
+    console.error("Error fetching products:", error);
+    return [];
+  }
+}
+
+export async function addProductsToCart(cartItems: CartItemsPost): Promise<void> {
+  console.log('START POST', cartItems)
+  try {
+    const response = await fetch(`${baseUrl}/cartItem`,{
+      method: "post",
+      body: JSON.stringify(cartItems),
+      headers: {'Content-Type': 'application/json'}
+    });
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+  } catch (error) {
+    console.error("Error fetching products:", error);
   }
 }

@@ -8,6 +8,6 @@ export class CartController {
   @Get()
   getCart() {
     return this.cartService.getCart();
-  }
+  };
   
 }

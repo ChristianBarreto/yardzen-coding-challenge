@@ -11,8 +11,3 @@ export type CartResponse = {
   id: string,
   items: CartItemResponse[]
 };
-
-export type CartItemsPost = {
-  cartId: string,
-  productIds: string[]
-};

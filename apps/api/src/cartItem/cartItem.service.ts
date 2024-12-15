@@ -19,5 +19,6 @@ export class CartItemService {
         })
       )
     );
-  }
+  };
+
 }

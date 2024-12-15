@@ -1,7 +1,9 @@
 'use client'
 import { createContext, ReactNode, useContext, useEffect, useState } from "react";
-import { CartItemsPost, CartResponse } from "../api/cart/types";
-import { addProductsToCart, getCart } from "../api/cart";
+import { CartResponse } from "../api/cart/types";
+import { getCart } from "../api/cart";
+import { addProductsToCart } from "../api/cartItems";
+import { CartItemsPost } from "../api/cartItems/types";
 
 const initCart: CartResponse = {
   id: '',

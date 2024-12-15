@@ -3,10 +3,7 @@ import { prisma } from "@repo/database";
 
 @Injectable()
 export class CartService {
-  findFirst() {
-    throw new Error("Method not implemented.");
-  }
-  
+
   async getCart() {
     const cart = await prisma.cart.findFirst();
 
@@ -20,13 +17,14 @@ export class CartService {
         id: cart.id,
         items: items
       };
-    } 
+    };
 
     const createdCart = await prisma.cart.create({data: {}});
 
     return {
       id: createdCart.id,
       items: [],
-    }
-  }
+    };
+  };
+
 }

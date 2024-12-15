@@ -8,7 +8,7 @@ export class HelloService {
     const cartCount = await prisma.cart.count();
 
     return {
-      message: "Hello from NestJS!",
+      message: "Hello from Yardzen store!",
       stats: {
         products: productCount,
         carts: cartCount,

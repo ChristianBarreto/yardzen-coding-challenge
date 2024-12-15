@@ -18,7 +18,7 @@ export default function Navbar() {
           <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
             <div className="indicator">
               <IconCart />
-              <span className="badge badge-sm indicator-item">{cart?.items.length}</span>
+              <span className="badge badge-sm indicator-item bg-red-500 text-white">{cart?.items.length}</span>
             </div>
           </div>
           <div

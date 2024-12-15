@@ -1,4 +1,4 @@
-import { HelloResponse } from "../../../api/types"
+import { HelloResponse } from "../../../api/hello/types"
 
 export default function Hero({
   hello,
@@ -11,7 +11,7 @@ export default function Hero({
         <div className="max-w-md">
           <h1 className="text-5xl font-bold">{hello.message}</h1>
           <p className="py-6">
-            Welcome to the Yardzen store! Please, choose the products you want to buy and press "Add to cart" button.
+            Welcome to Yardzen store! Please, choose the products you want to buy and press "Add to cart" button.
           </p>
           <span className="bg-primary p-4 rounded-lg text-slate-300">
             We have {hello.stats.products} products available

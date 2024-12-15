@@ -1,9 +1,12 @@
 'use client'
 import { useEffect, useState } from "react"
 import { Product, ProductsResponse } from "../../../api/products/types"
-import TableRow from "../../cells/TableRow"
+import TableRow from "../../molecules/TableRow"
 import { useCart } from "../../../context/cartContext"
 import { getProducts } from "../../../api/products"
+import IconSearch from "../../atoms/IconSearch"
+import Table from "../../cells/Table"
+import Cards from "../../cells/Cards"
 
 type ProductSelection = Product & {
   isSelected: boolean
@@ -65,60 +68,38 @@ export default function ProductList() {
 
   return (
     <div className="flex justify-center">
-      <div className="overflow-x-auto w-3/4">
-        <label className="input input-bordered flex items-center gap-2 my-2">
-          <input type="text" className="grow " placeholder="Search" value={search} onChange={(e) => setSearch(e.target.value)} />
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 16 16"
-            fill="currentColor"
-            className="h-4 w-4 opacity-70">
-            <path
-              fillRule="evenodd"
-              d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
-              clipRule="evenodd" />
-          </svg>
-        </label>
-        <button
-          className="btn btn-primary my-2 w-full"
-          onClick={handleAddCart}
-          disabled={!cart.id}
-        >
-          Add to cart
-        </button>
-        <table className="table">
-          <thead>
-            <tr>
-              <th>
-                <label>
-                  <input
-                    type="checkbox"
-                    className="checkbox"
-                    checked={selectAll}
-                    onChange={handleToggleAll}
-                  />
-                </label>
-              </th>
-              <th>Name</th>
-              <th>Type</th>
-              <th>Price</th>
-            </tr>
-          </thead>
-          <tbody>
-            {productsSelection
-              .sort((a, b) => {
-                return a.type > b.type ? 1 : -1
-              }) // Note: Once the prisma does not support sort enum like string, I left this FE sort here, but it's also implemented on BE.
-              .map((product) => (
-                <TableRow
-                  key={product.id}
-                  product={product}
-                  handleToggleItem={handleToggleItem}
-                />
-              ))
-            }
-          </tbody>
-        </table>
+      <div className="overflow-x-auto w-3/4 p-2">
+        <div className="flex flex-wrap gap-2">
+          <label className="input input-bordered flex items-center gap-2 my-2 grow">
+            <input
+              type="text"
+              className="grow"
+              placeholder="Search"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+            <IconSearch />
+          </label>
+          <button
+            className="btn btn-primary my-2 grow md:w-2"
+            onClick={handleAddCart}
+            disabled={!cart.id}
+          >
+            Add to cart
+          </button>
+        </div>
+        <Table
+          selectAll={selectAll}
+          handleToggleAll={handleToggleAll}
+          productsSelection={productsSelection}
+          handleToggleItem={handleToggleItem}
+        />
+        <Cards
+          selectAll={selectAll}
+          handleToggleAll={handleToggleAll}
+          productsSelection={productsSelection}
+          handleToggleItem={handleToggleItem}
+        />
       </div>
     </div>
   )

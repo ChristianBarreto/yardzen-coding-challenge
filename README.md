@@ -1,5 +1,42 @@
 # Yardzen Coding Challenge
 
+## My comments
+Hello Yardzen team, I'm Christian Barreto (Howdy) and I'm happy to submit this test for your evaluation. Please fell free to ask me anything you find necessary on:
+
+**christiannabasbarreto@gmail.com**
+**+55 22 981111706**
+
+
+See below some notes about this project.
+
+## Notes:
+I worked to implement all requirements described on the next topics, see below a table with a summary:
+
+![picture](./pic.jpg)
+
+Item Display
+- **(DONE)** Fetch and display items with prices via API
+- **(DONE)** Group items by their types
+- **(DONE)** Frontend must fetch data through API endpoints (no direct database access)
+
+Item Selection
+- **(DONE)** Users can check/uncheck items on the frontend
+- **(DONE)** Selected items can be added to cart
+
+Cart Management
+- **(DONE)** "Add to Cart" button adds checked items to cart
+- **(DONE)** Only one cart should exist in the database
+- **(DONE)** Cart should be upserted on each "Add to Cart" action (create if none exists, update if it does)
+- **(DONE)** Ability to fetch and display cart items with total price
+
+Stretch Goals
+- **(DONE)** Implement filtering/search functionality
+- **(DONE)** Make the application mobile responsive
+- **(DONE)** Add product images
+
+## Other considerations
+I made some commends on code that explains some decisions made, please search for "NOTE" then you will find them.
+
 ## Overview
 
 Welcome to the Yardzen Full-Stack Coding Challenge! This exercise is designed to evaluate both your frontend and backend development skills while building something fun and practical. The challenge is designed to take approximately 2-4 hours to complete.

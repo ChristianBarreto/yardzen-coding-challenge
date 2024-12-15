@@ -5,8 +5,6 @@ import { prisma } from "@repo/database";
 export class CartItemService {
 
   async addCartItems(cartItems) {
-    console.log("service", cartItems)
-
     const {cartId, productIds} = cartItems;
 
     return await prisma.$transaction(

@@ -1,4 +1,16 @@
-export default function Navbar() {
+'use client'
+import { useEffect } from "react";
+import { getCart } from "../../../api";
+import { useCart } from "../../../context/cartContext"
+import { CartItemResponse, CartResponse } from "../../../api/types";
+
+export default function Navbar({
+}: {
+}) {
+  const {cart} = useCart();
+
+  console.log("Navbar cart", cart)
+  
   return (
     <div className="navbar bg-base-100">
       <div className="flex-1">
@@ -20,15 +32,26 @@ export default function Navbar() {
                   strokeWidth="2"
                   d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
               </svg>
-              <span className="badge badge-sm indicator-item">8</span>
+              <span className="badge badge-sm indicator-item">{cart?.items.length}</span>
             </div>
           </div>
           <div
             tabIndex={0}
             className="card card-compact dropdown-content bg-base-100 z-[1] mt-3 w-52 shadow">
             <div className="card-body">
-              <span className="text-lg font-bold">8 Items</span>
-              <span className="text-info">Subtotal: $999</span>
+              <span className="text-lg font-bold">{cart?.items.length} Items</span>
+              {cart?.items.map((item: any) => (
+                <span key={item.id} className="text-gray-400">
+                  {item.product.name}
+                </span>
+              ))}
+              <span className="text-info">
+                Subtotal: ${
+                  cart?.items.reduce((acc: number, curr: CartItemResponse) => {
+                    return acc + Number(curr.product.price)
+                  }, 0)
+                }
+              </span>
               <div className="card-actions">
                 <button className="btn btn-primary btn-block">View cart</button>
               </div>

@@ -5,17 +5,20 @@ export const metadata = {
 
 import './globals.css';
 import Navbar from './components/organisms/Navbar';
+import { CartProvider, useCart } from './context/cartContext';
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  
   return (
     <html lang="en">
       <body>
-        <Navbar />
-        {children}
+        <CartProvider >
+          {children}
+        </CartProvider>
       </body>
     </html>
   );

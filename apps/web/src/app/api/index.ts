@@ -1,4 +1,4 @@
-import { CartItemsPost, HelloResponse, ProductsResponse } from "./types";
+import { CartItemResponse, CartItemsPost, CartResponse, HelloResponse, ProductsResponse } from "./types";
 
 const baseUrl = "http://localhost:3333";
 
@@ -31,7 +31,7 @@ export async function getProducts(): Promise<ProductsResponse> {
   }
 }
 
-export async function getCart(): Promise<ProductsResponse> {
+export async function getCart(): Promise<CartResponse | undefined> {
   try {
     const response = await fetch(`${baseUrl}/cart`);
     if (!response.ok) {
@@ -40,7 +40,7 @@ export async function getCart(): Promise<ProductsResponse> {
     return response.json();
   } catch (error) {
     console.error("Error fetching products:", error);
-    return [];
+    return undefined;
   }
 }
 

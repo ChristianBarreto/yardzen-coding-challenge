@@ -6,13 +6,12 @@ import StoreTemplate from "./templates/StoreTamplate";
 
 export default async function Home() {
   const hello = await getHello();
-  const products = await getProducts();
   
   return (
     <main>
       <StoreTemplate>
         <Hero hello={hello} />
-        <ProductList products={products} />
+        <ProductList />
       </StoreTemplate>
     </main>
   );

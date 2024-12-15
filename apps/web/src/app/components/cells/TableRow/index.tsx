@@ -29,7 +29,7 @@ export default function TableRow({
           <div className="avatar">
             <div className="mask mask-squircle h-12 w-12">
               <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjBXEYcyu5qH2MfqlLG6WQLynkjvsunsgBqA&s"
+                src={product.imgUrl}
                 alt="Avatar Tailwind CSS Component" />
             </div>
           </div>

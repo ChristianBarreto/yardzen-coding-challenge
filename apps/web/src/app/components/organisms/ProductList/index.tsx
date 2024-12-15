@@ -17,7 +17,6 @@ export default function ProductList() {
   const { cart, addToCart } = useCart();
   
   useEffect(() => {
-    console.log(search)
     const queryString = `?name=${search}&orderBy[type]=asc`; // Note: This query string can be improved using 'qs'
     const handler = setTimeout(() => getProducts(queryString).then((res) => {
       setProducts(res)

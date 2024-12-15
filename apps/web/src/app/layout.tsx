@@ -16,7 +16,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <CartProvider >
+        <CartProvider>
           {children}
         </CartProvider>
       </body>

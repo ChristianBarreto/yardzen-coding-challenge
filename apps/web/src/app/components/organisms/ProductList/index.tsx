@@ -2,7 +2,6 @@
 import { useEffect, useState } from "react"
 import { Product, ProductsResponse } from "../../../api/types"
 import TableRow from "../../cells/TableRow"
-import { addProductsToCart } from "../../../api"
 import { useCart } from "../../../context/cartContext"
 
 type ProductSelection = Product & {
@@ -11,14 +10,12 @@ type ProductSelection = Product & {
 
 export default function ProductList({
   products,
-  cartId,
 }: {
   products: ProductsResponse,
-  cartId?: string,
 }) {
   const [selectAll, setSelectAll] = useState(false);
   const [productsSelection, setProductsSelection] = useState<ProductSelection[]>([]);
-  const { addToCart } = useCart();
+  const { cart, addToCart } = useCart();
   
   useEffect(() => {
     setProductsSelection(
@@ -49,9 +46,9 @@ export default function ProductList({
     const selectedProducts = productsSelection
       .filter((p) => p.isSelected)
       .map((p) => p.id)
-    if(cartId && selectedProducts.length){
+    if(cart.id && selectedProducts.length){
       addToCart({
-        cartId: cartId,
+        cartId: cart.id,
         productIds: selectedProducts
       })
       handleDeselectAll();
@@ -61,13 +58,24 @@ export default function ProductList({
   return (
     <div className="flex justify-center">
       <div className="overflow-x-auto w-3/4">
-      <button className="btn btn-primary" onClick={handleAddCart} disabled={!cartId}>Add to cart</button>
+        <button
+          className="btn btn-primary w-full my-2"
+          onClick={handleAddCart}
+          disabled={!cart.id}
+        >
+          Add to cart
+        </button>
         <table className="table">
           <thead>
             <tr>
               <th>
                 <label>
-                  <input type="checkbox" className="checkbox" checked={selectAll} onChange={handleToggleAll}/>
+                  <input
+                    type="checkbox"
+                    className="checkbox"
+                    checked={selectAll}
+                    onChange={handleToggleAll}
+                  />
                 </label>
               </th>
               <th>Name</th>
@@ -81,7 +89,11 @@ export default function ProductList({
                 return a.type > b.type ? 1 : -1
               })
               .map((product) => (
-                <TableRow key={product.id} product={product} handleToggleItem={handleToggleItem}/>
+                <TableRow
+                  key={product.id}
+                  product={product}
+                  handleToggleItem={handleToggleItem}
+                />
               ))
             }
           </tbody>

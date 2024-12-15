@@ -13,7 +13,9 @@ export default function Hero({
           <p className="py-6">
             Welcome to the Yardzen store! Please, choose the products you want to buy and press "Add to cart" button.
           </p>
-          <button className="btn btn-primary">Add to cart</button>
+          <span className="bg-primary p-4 rounded-lg text-slate-300">
+            We have {hello.stats.products} products available
+          </span>
         </div>
       </div>
     </div>

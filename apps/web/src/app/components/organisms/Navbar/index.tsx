@@ -1,37 +1,23 @@
 'use client'
-import { useEffect } from "react";
-import { getCart } from "../../../api";
 import { useCart } from "../../../context/cartContext"
-import { CartItemResponse, CartResponse } from "../../../api/types";
+import IconCart from "../../atoms/IconCart";
+import { useMemo } from "react";
+import { handleCalcTotal } from "../../../helpers";
 
-export default function Navbar({
-}: {
-}) {
-  const {cart} = useCart();
-
-  console.log("Navbar cart", cart)
+export default function Navbar() {
+  const { cart } = useCart();
+  const calcTotal = useMemo(() => handleCalcTotal(cart.items), [cart.items]);
   
   return (
     <div className="navbar bg-base-100">
       <div className="flex-1">
-        <a className="btn btn-ghost text-xl">Yardzen</a>
+        <a className="btn btn-ghost text-xl">Yardzen Store</a>
       </div>
       <div className="flex-none">
         <div className="dropdown dropdown-end">
           <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
             <div className="indicator">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-              </svg>
+              <IconCart />
               <span className="badge badge-sm indicator-item">{cart?.items.length}</span>
             </div>
           </div>
@@ -46,15 +32,8 @@ export default function Navbar({
                 </span>
               ))}
               <span className="text-info">
-                Subtotal: ${
-                  cart?.items.reduce((acc: number, curr: CartItemResponse) => {
-                    return acc + Number(curr.product.price)
-                  }, 0)
-                }
+                Subtotal: ${ calcTotal.toFixed(2) }
               </span>
-              <div className="card-actions">
-                <button className="btn btn-primary btn-block">View cart</button>
-              </div>
             </div>
           </div>
         </div>

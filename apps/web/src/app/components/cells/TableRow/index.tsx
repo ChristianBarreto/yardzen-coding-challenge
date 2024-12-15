@@ -1,4 +1,4 @@
-import { Product } from "../../../api/types";
+import { Product } from "../../../api/products/types";
 
 type ProductSelection = Product & {
   isSelected: boolean
@@ -15,7 +15,13 @@ export default function TableRow({
     <tr className="hover">
       <th>
         <label>
-          <input type="checkbox" className="checkbox" name={product.id} checked={product.isSelected} onChange={(e) => handleToggleItem(e.target.name)}/>
+          <input
+            type="checkbox"
+            className="checkbox"
+            name={product.id}
+            checked={product.isSelected}
+            onChange={(e) => handleToggleItem(e.target.name)}
+          />
         </label>
       </th>
       <td>

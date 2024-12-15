@@ -1,10 +1,7 @@
 'use client'
-import { createContext, ReactNode, Reducer, useContext, useEffect, useReducer, useState } from "react";
-import { CartItemResponse, CartItemsPost, CartResponse, Product } from "../api/types";
-import { addProductsToCart, getCart } from "../api";
-
-type ACTIONTYPE =
-  | { type: "add"; cart: CartItemsPost }
+import { createContext, ReactNode, useContext, useEffect, useState } from "react";
+import { CartItemsPost, CartResponse } from "../api/cart/types";
+import { addProductsToCart, getCart } from "../api/cart";
 
 const initCart: CartResponse = {
   id: '',
@@ -31,18 +28,17 @@ export function CartProvider({
         if (res){
           setCart(res)
         }
-      })
-    })
-  }
+      });
+    });
+  };
 
   useEffect(() => {
     getCart().then((res) => {
       if (res){
         setCart(res)
       }
-    })
-    
-  }, [])
+    });
+  }, []);
   
   return (
     <CartContext.Provider value={{cart, addToCart}}>
@@ -53,22 +49,4 @@ export function CartProvider({
 
 export function useCart() {
   return useContext(CartContext);
-}
-
-// function CartReducer(cartItems: CartItemsPost, action: ACTIONTYPE): CartResponse {
-//   switch(action.type) {
-//     case 'add': {
-//       console.log("XXX", cartItems, action)
-//       addProductsToCart({
-//         cartId: action.cart.cartId,
-//         productIds: action.cart.productIds
-//       })
-//     }
-//     default: {
-//       return {
-//         id: cartItems.cartId,
-//         items: []
-//       };
-//     }
-//   }
-// } 
+};

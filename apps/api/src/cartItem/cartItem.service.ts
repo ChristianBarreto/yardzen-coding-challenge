@@ -5,15 +5,15 @@ import { prisma } from "@repo/database";
 export class CartItemService {
 
   async addCartItems(cartItems) {
-    const {cartId, productIds} = cartItems;
+    const {cartId, productIds } = cartItems;
 
     return await prisma.$transaction(
-      productIds.map((productId) =>
+      productIds.map((pId: string) =>
         prisma.cartItem.upsert({
-          where: {id: productId},
+          where: {productId: pId},
           create: {
             cartId: cartId,
-            productId
+            productId: pId
           },
           update: {}
         })

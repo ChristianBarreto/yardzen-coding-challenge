@@ -7,7 +7,6 @@ export class CartItemController {
 
   @Post()
   addCartItems(@Body() cartItems: any) {
-    console.log("controller", cartItems)
     return  this.cartItemService.addCartItems(cartItems);
   };
 
